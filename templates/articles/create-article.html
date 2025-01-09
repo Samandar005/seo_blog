@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Yangi Maqola Qo'shish - Zamonaviy Dasturchi {% endblock %}
+
+{% block content %}
+<section class="create-article-form">
+    <h2>Yangi Maqola Qo'shish</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title">Sarlavha:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="content">Maqola matni:</label>
+            <textarea id="content" name="content" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="author">Muallif:</label>
+            <select id="author" name="author" required>
+                <option value="">Muallifni tanlang</option>
+                {% for author in authors %}
+                <option value="{{ author.id }}">{{ author.first_name }} {{ author.last_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="image">Rasm:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+        </div>
+        <button type="submit" class="submit-button">Maqolani Qo'shish</button>
+    </form>
+</section>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+
+{% block title %}{% if author %} Muallifni tahrirlash - Zamonaviy Dasturchi {% else %} Yangi Muallif Qo'shish - Zamonaviy Dasturchi {% endif %}{% endblock %}
+
+{% block content %}
+     <section class="create-author-form">
+                <h2>{% if author %} Muallifni Tahrirlash {% else %}Yangi Muallif Qo'shish{% endif %}</h2>
+                <form  method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="first_name">Ism:</label>
+                        <input type="text" id="first_name" name="first_name" value="{{ author.first_name }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Familiya:</label>
+                        <input type="text" id="last_name" name="last_name" value="{{ author.last_name }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Biografiya:</label>
+                        <textarea id="description" name="description"  required>{{ author.description }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="bod">Tug'ulgan sana:</label>
+                        {% if author.bod %}
+                            <input type="date" id="bod" name="bod" value="{{ author.bod|date:'Y-m-d' }}" required>
+                        {% else %}
+                            <input type="date" id="bod" name="bod" required>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" value="{{ author.email }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Rasm:</label>
+                        {%  if author.image.url %}
+                            <img src="{{ author.image.url }}" alt="{{ track.title }}" class="current-image" style="width: 350px; height: 260px;">
+                        {% endif %}
+                            <input type="file" id="image" name="image" accept="image/*" required>
+                    </div>
+                    {% if author %}
+                        <button type="submit" class="submit-button">Muallifni Tahrirlash</button>
+                        <button type="submit" class="submit-button"><a href="{% url 'articles:author_list' %}">Orqaga</a></button>
+                    {% else %}
+                        <button type="submit" class="submit-button">Muallifni Qo'shish</button>
+                    {% endif %}
+                </form>
+     </section>
+{% endblock %}

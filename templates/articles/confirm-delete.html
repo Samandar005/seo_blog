@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="modal-container">
+    <div class="modal-card">
+        <i class="fas fa-exclamation-triangle warning-icon"></i>
+        <h2 class="title">Malumotni o'chirish</h2>
+        <p class="message">Bu amalni qaytarib bo'lmaydi.</p>
+        <form method="POST" class="button-group">
+            {% csrf_token %}
+
+            <button type="button" class="btn btn-primary"><a href="{% url 'articles:author_list' %}">Bekor qilish</a></button>
+            <button type="submit" class="btn-delete">O'chirish</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

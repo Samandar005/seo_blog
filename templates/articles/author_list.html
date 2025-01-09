@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Mualliflar - Zamonaviy Dasturchi{% endblock %}
+
+{% block content %}
+<section class="auth-section">
+    <h2 class="auth-title">Bizning Mualliflar</h2>
+    <div class="auth-grid">
+        {% for author in authors %}
+            <article class="auth-card">
+                <div class="auth-banner">
+                    <img src="{{ author.image.url }}" alt="{{ author.first_name }} {{ author.last_name }}">
+                </div>
+                <div class="auth-content">
+                    <h3 class="auth-name">{{ author.first_name }} {{ author.last_name }}</h3>
+                    <div class="auth-details">
+                        <p class="auth-date">{{ author.bod }}</p>
+                        <p class="auth-email">{{ author.email }}</p>
+                        <p class="auth-bio">{{ author.description }}</p>
+                    </div>
+                    <div class="auth-stats">
+                        <span class="auth-count">{{ author.articles.count }} maqola</span>
+                    </div>
+                    <div class="auth-actions">
+                        <a href="{{ author.get_update_author }}" class="auth-btn auth-btn-edit">
+                            <span>Tahrirlash</span>
+                        </a>
+                        <a href="{{ author.get_delete_author }}" class="auth-btn auth-btn-delete">
+                            <span>O'chirish</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+        {% empty %}
+            <h3>Not Found!</h3>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Izoh muvaffaqiyatli qoldirildi - Zamonaviy Dasturchi {% endblock %}
+
+{% block content %}
+    <div class="success-message">
+        <div class="success-icon">✅</div>
+        <h1>Izohingiz muvaffaqiyatli qoldirildi!</h1>
+        <p>Rahmat! Sizning fikringiz biz uchun muhim.</p>
+        <a href="{% url 'articles:comment_create' article.pk %}" class="button">Maqolaga qaytish</a>
+        <a href="{% url 'home' %}" class="button">Asosiy sahifaga o'tish</a>
+    </div>
+{% endblock %}
+

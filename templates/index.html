@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Zamonaviy Dasturchi {% endblock %}
+
+{% block content %}
+    {% for article in articles %}
+        <article class="post">
+            <img src="{{ article.image.url }}" alt="{{ article.title }}">
+
+            <h2>{{ article.title }}</h2>
+            <p>{{ article.content }}</p>
+            <a href="{{ article.get_detail_url }}" class="read-more">Batafsil o'qish</a>
+        </article>
+    {% empty %}
+        <h3>No Found!</h3>
+    {% endfor %}
+{% endblock %}
